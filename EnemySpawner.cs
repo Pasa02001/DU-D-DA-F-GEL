@@ -6,11 +6,12 @@ using System.Collections.Generic;
 
 namespace Template
 {
-    class EnemySpawner
+    class EnemySpawner 
     {
         private List<Enemy> enemies = new List<Enemy>();
         private float time = 5;
         private float timer = 0;
+        private Enemy enemy;
         private Random rnd = new Random();
         public EnemySpawner(List<Enemy> enemies)
         {
@@ -22,16 +23,21 @@ namespace Template
             {
                 timer -= time;
                 int x,y;
-
-                do
+                if (enemies.Count <= 10)
                 {
                     x = 840;
                     y = rnd.Next(0, 420);
-                } while (enemies.Count <= 10);
-                enemies.Add(new Enemy(Assets.Bomb, new Vector2(x, y)));
+                    enemies.Add(new Enemy(Assets.Bomb, new Vector2(x, y), (float)(Math.PI/4))) ;
+                
+                }
+
+               
             }
 
+
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            
 
         }
     }
